@@ -2,6 +2,7 @@ package org.andestech.learning.rfb18.g2;
 
 import org.junit.*;
 import org.junit.experimental.categories.Category;
+import org.junit.rules.Timeout;
 
 public class App2Test {
 
@@ -10,12 +11,16 @@ public class App2Test {
 
     }
 
+    @Rule
+    public Timeout t = new Timeout(200);
+
     @Test
     @Category({IFastMethod.class})
-    public void testMeth1Fast()
+    public void testMeth1Fast() throws InterruptedException
     {
         System.out.println( Thread.currentThread().getStackTrace()[1].getMethodName()  );
         Assert.assertTrue(true);
+        Thread.sleep(400);
 
     }
 
@@ -27,12 +32,13 @@ public class App2Test {
 
     }
 
+   // @Test(timeout = 200)
     @Test
     @Category({ISlowMethod.class})
-    public void testMeth3Slow()
-    {
+    public void testMeth3Slow() throws InterruptedException {
         System.out.println( Thread.currentThread().getStackTrace()[1].getMethodName()  );
         Assert.assertTrue(true);
+        Thread.sleep(250);
 
     }
 
